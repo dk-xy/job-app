@@ -1,0 +1,22 @@
+.barreRecherche{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon{
+    margin: 10px;
+    font-size: 25px;
+    color: black;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-auto-flow: row;
+    height: 100%;
+  }
+
+  .infoService {
+    color: black;
+  }

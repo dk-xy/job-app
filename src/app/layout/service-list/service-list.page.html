@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <img src="/assets/jobapp.png" width="40%">
+    <!-- <ion-title>JobApp</ion-title> -->
+    <!-- <img src="../../../../assets/iconJobApp.png"> -->
+    <!-- <img src="job-app/assets/iconJobApp.png">
+    <ion-img src="../../../../assets/iconJobApp.png"></ion-img> -->
+
+    
+    <ion-button routerLink="/service-list" id="notifButton" slot="end">
+      <ion-icon name="notifications-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab z-index="30002" slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button class="addButton" (click)="openCreateServiceModal()" color="secondary">
+      <ion-icon id="btnadd" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="barreRecherche">
+    <a routerLink="/service-map">
+      <ion-icon id="icon1" class="icon" name="map-sharp" color='secondary'></ion-icon>
+    </a>
+    <ion-searchbar animated="true" placeholder="Rechercher un service" [debounce]="1000"
+      (ionChange)="handleChange($event)"></ion-searchbar> 
+  </div>
+
+
+
+  <ion-list>
+    <ion-item class="service" (click)="afficheService(service)" *ngFor="let service of services; let index">
+      <div class="serviceImage">
+        <img class="squareimg" [ngStyle]="{'background-image': 'url(' + service.picture + ')', 'background-size': 'cover'}">
+        <!-- alt="image indisponible" -->
+      </div>
+      <div class="infosService">
+        <div class="servicelien">
+          <h2 class="serviceTitre">{{ service.titre }}</h2>
+          <p class="serviceDate">{{ service.date | date: "dd MMM yyyy" }}</p>
+        </div>
+      </div>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="loadMoreData()" *ngIf="!allDataLoaded">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+
+
+</ion-content>

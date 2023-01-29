@@ -1,0 +1,15 @@
+{
+  "name": "jobApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "",
+      "proxyUrl": "https://jobapp.onrender.com/"
+    }
+    
+  ]
+
+}

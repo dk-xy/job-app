@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title *ngIf="!serviceToUpdate" routerLink="/service-list">Ajout service</ion-title>
+        <ion-title *ngIf="serviceToUpdate" routerLink="/service-list">Modification service</ion-title>
+        <ion-buttons slot="end">
+            <ion-button width="80px" class="closeButton" (click)="closeModal()">
+              CLOSE
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<!-- <h1>Création d'une annonce</h1> -->
+<ion-item *ngIf="serviceToUpdate" color="warning">
+Laisser vide pour ne pas changer
+</ion-item>
+<ion-item>
+  <ion-label>Image</ion-label>
+  <ion-button (click)="takePicture()"> Prendre une photo
+    <ion-icon name="camera-outline"></ion-icon></ion-button>
+  <img *ngIf="picture" [src]="picture" />
+</ion-item>
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input [(ngModel)]="titre" name="titre" inputmode="text" placeholder="Titre du service" minlength="3" maxlength="30">
+    </ion-input>
+    <div *ngIf="!validation.isFormValid && validation.formErrors['titre']" class="error-message-bottom">
+      {{validation.formErrors['titre']}}
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Location <span></span>
+    </ion-label>
+    <ion-button (click)="getCurrentPosition()">get position</ion-button>
+    {{ latitude }}
+    {{ longitude }}
+    <input type="hidden" [(ngModel)]="location" name="location">
+    <div *ngIf="!validation.isFormValid && validation.formErrors['location']" class="error-message-bottom">
+      {{validation.formErrors['location']}}
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime [(ngModel)]="date" name="date"  locale="ch-CH" max="2025" [min]="todaysDate" >
+      <!-- <span slot="title">Select a Reservation Date</span>
+      <span slot="time-label">Heure</span> -->
+    </ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Type</ion-label>
+    <!-- enum: ['Assistance', 'Promenade', 'Jardinage', 'Prêt', 'Autres'] -->
+    <ion-select [(ngModel)]="type" interface="popover" name="type" placeholder="Selectionner le type">
+      <ion-select-option value="Assistance">Assistance</ion-select-option>
+      <ion-select-option value="Promenade">Promenade</ion-select-option>
+      <ion-select-option value="Jardinage">Jardinage</ion-select-option>
+      <ion-select-option value="Prêt">Prêt</ion-select-option>
+      <ion-select-option value="Autres">Autres</ion-select-option>
+    </ion-select>
+    <div *ngIf="!validation.isFormValid && validation.formErrors['type']" class="error-message-bottom">
+      {{validation.formErrors['type']}}
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-label>Description</ion-label>
+    <ion-input [(ngModel)]="description" name="description" minlength="3" maxlength="30" placeholder="Entrez du texte"></ion-input>
+    <div *ngIf="!validation.isFormValid && validation.formErrors['description']" class="error-message-bottom">
+      {{validation.formErrors['description']}}
+    </div>
+  </ion-item>
+  <div class="modal--button">
+    <ion-button type="submit">Submit</ion-button>
+  </div>
+  
+</form>
+
+</ion-content>

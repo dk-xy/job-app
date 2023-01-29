@@ -1,0 +1,60 @@
+.infosUser{
+  margin-left: 10px;
+}
+
+.userName, .email{
+  margin-left: 10px;
+}
+
+.email{
+  color: #666666;
+}
+
+.linksProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.buttonLinks{
+  align-self: flex-start;
+  margin:0%;
+}
+
+.buttonsLinks{
+  display: flex;
+  margin-left: auto;
+}
+
+.serviceImage {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.605);
+  border-radius: 5px;
+}
+
+.serviceTitre{
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+.serviceDate{
+  color:rgb(142, 142, 142);
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+
+ion-toast.deleted-toaser{
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+  }
+
+
+.toast-scheme {
+  background: rgb(109, 234, 84) !important ;
+  // color: red!important ;
+
+
+}

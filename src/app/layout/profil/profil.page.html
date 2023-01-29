@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>JobApp</ion-title> -->
+    <img src="/assets/jobapp.png" width="40%">
+    <ion-button id="notifButton" slot="end">
+      <ion-icon name="notifications-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment [(ngModel)]="selectTabs" color="secondary" value="default">
+    <ion-segment-button value="default">
+      <ion-label>Profil</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="mesAnnonces">
+      <ion-label>Mes annonces</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <section *ngIf="selectTabs === 'default'">
+    <div class="infosUser">
+      <h3 class="enteteSection">Connecté·e en tant que</h3>
+      <p class="userName">{{ userName }}</p>
+      <p class="email">{{ userEmail }}</p>
+      <ion-button class="buttonLinks" color="medium" fill="clear">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="linksProfile">
+      <ion-button class="buttonLinks" color="danger" fill="clear" (click)="logOut()">
+        <ion-icon name="power"></ion-icon>
+        <p color="danger"> Se déconnecter</p>
+      </ion-button>
+    </div> 
+  </section>
+
+<!-- NOTE: on aurait pu faire une route service/user/:id et fetch de la au lieu de récupérer tout et afficher avec ngIf
+mais pas assez de temps à dispo -->
+  <section *ngIf="selectTabs === 'mesAnnonces'">
+    <h3 class="enteteSection">Mes annonces</h3>
+
+    <ion-list>
+      <div class="service" *ngFor="let service of services">
+        <ion-item *ngIf="service.provider === userID">
+
+          <div class="serviceImage" (click)="afficheServiceCall(service)">
+            <img src={{service.picture}} height="100%" width="">
+          </div>
+          <div class="infosService">
+            <h2 class="serviceTitre">{{ service.titre }}</h2>
+            <p class="serviceDate">{{ service.date | date: "dd MMM yyyy" }}</p>
+          </div>
+          <div class="buttonsLinks">
+            <ion-button (click)="updateServ(service._id)" class="buttonLinks" color="medium" fill="clear">
+              <ion-icon name="pencil"></ion-icon>
+            </ion-button>
+            <!-- <ion-button (click)="deleteServ(service)" class="buttonLinks" color="danger" fill="clear"> -->
+            <ion-button (click)="presentAlert(service._id)" class="buttonLinks" color="danger" fill="clear">
+
+            <ion-icon name="trash-bin-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-item>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="loadMoreData()" *ngIf="!allDataLoaded">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+    </ion-list>
+
+  </section>
+
+
+</ion-content>
